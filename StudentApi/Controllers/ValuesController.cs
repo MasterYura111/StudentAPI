@@ -13,18 +13,17 @@ namespace StudentApi.Controllers
     {
         StudentContext db = new StudentContext();
 
-
         public IEnumerable<Student> GetStudents()
         {
             return db.Students;
         }
 
-        public Student GetStudent(int id)
+        [HttpGet]
+        public Student Student(int id)
         {
             Student student = db.Students.Find(id);
 
             return student;
-
         }
 
 
@@ -35,7 +34,6 @@ namespace StudentApi.Controllers
             db.SaveChanges();
         }
 
-
         [HttpPut]
         public void EditStudent(int id, [FromBody]Student student)
         {
@@ -43,7 +41,6 @@ namespace StudentApi.Controllers
             {
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
-
             }
         }
 
@@ -56,7 +53,6 @@ namespace StudentApi.Controllers
                 db.Students.Remove(student);
                 db.SaveChanges();
             }
-
         }
     }
 }
